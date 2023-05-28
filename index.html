@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<style>
+    a
+    {
+        display: flex; 
+        justify-content: center; 
+        align-items: center;}
+    img
+    {
+        width: 200px;
+        height: auto; 
+    }
+    .animated-image 
+    {
+        border-radius: 20px;
+        clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+        transition: transform 0.3s ease;
+        border: 2px solid #ccc;box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);filter: grayscale(50%);
+    }
+    .animated-image:hover 
+    {
+        transform: scale(1.2);
+        filter: none;
+    }
+    .table1 
+    { 
+        display: flex; 
+        text-align: justify; 
+    }
+    .table2 
+    { 
+        float: left;
+        width: 50%;
+        padding: 30px;
+        height: 150px; 
+    }
+    
+</style>
+
+<html>
+    <link rel="stylesheet" href="`designhome.css">
+    <title>HomeMart Store</title>
+    <body>
+    <h1 style="text-align: center;">HomeMart Groceries</h1>
+    <br>
+    
+    <div class="table1">
+        <div class="table2">
+           <h2 style="text-align: center;">Cutlery</h2>
+           <a href="~directory1.html">
+            <img src="item1.avif" alt="Cutlery" class="animated-image"> 
+           </a>
+        </div>
+        <div class="table2">
+            <h2 style="text-align: center;">Vegetable & Meat</h2>
+            <a href="~directory2.html">
+                <img src="item2.jpg" alt="Staple" class="animated-image">
+            </a>
+            
+        </div>
+    </div>  
+    <br>  
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+            <h2 style="text-align: center;">Other</h2>
+            <a href="~directory3.html">
+                <img src="item3.jpg" alt="Personal" class="animated-image">
+            </a>
+            
+    </body>   
+</html>

@@ -1,0 +1,12 @@
+body
+{
+    background-image: url("b1.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: 100vw 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h1
+{
+    background-color: burlywood;
+}

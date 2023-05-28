@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+  <link rel="stylesheet" href="`designd2.css">
+  <head>
+    <title>Vege & Meat...</title>
+    <style>
+      /* Hide counter elements initially */
+      #countercarrot,
+      #counterbroccoli,
+      #countercorn,
+      #countereggplant,
+      #countercucumber,
+      #countergarlic,
+      #counteronion,
+      #counterchicken,
+      #counterbeef,
+      #counterfish,
+      #counterprawn,
+      #countersquid,
+      #counteregg{
+        display: none;
+      }
+      table, td, th {
+        border: 1px solid black;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th {
+        height: 70px;
+      }
+
+      /* Styling for the stationary items */
+      .stationary-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        border: 1px solid black;
+        padding: 10px;
+      }
+
+      .stationary-item span {
+        margin: 0 10px;
+      }
+
+      /* Styling for the links in the aside */
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Styling for the item images */
+      img {
+        width: 200px;
+        height: auto;
+        margin-right: 100px;
+      }
+
+      /* Styling for the cart container */
+      #cart-container {
+        margin-top: 20px;
+        border: 1px solid black;
+        padding: 10px;
+      }
+
+      #cart-container .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+      }
+
+      #cart-container .cart-item span {
+        margin-right: 10px;
+      }
+
+      #cart-container .total {
+        font-weight: bold;
+      }
+
+      /* Flexbox setup for the main content and aside */
+      body {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .content {
+        flex: 1;
+      }
+
+      aside {
+        flex: 0 0 450px; /* Set the width of the aside element */
+        margin-top: 80px;
+        border: 1px solid black;
+        padding: 5px;
+        position: sticky;
+        top: 0;
+        height: calc(100vh - 20px); /* Subtract the margin-top of cart-container */
+        overflow-y: auto;
+      }
+      button{
+      background-color:salmon;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      }
+      .proceed-btn {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      }
+
+      .btn-link {
+      color: white;
+      text-decoration: none;
+      }
+
+      .proceed-btn:hover {
+      background-color: #45a049;
+      }
+    </style>
+    <script>
+      var cartItems = {
+        carrot: 0,
+        broccoli: 0,
+        corn: 0,
+        eggplant: 0,
+        cucumber: 0,
+        garlic: 0,
+        onion: 0,
+        chicken: 0,
+        beef: 0,
+        fish: 0,
+        prawn: 0,
+        squid: 0,
+        egg: 0,
+      };
+
+      var itemPrices = {
+        carrot: 3,
+        broccoli: 4,
+        corn: 3,
+        eggplant: 4,
+        cucumber: 3,
+        garlic: 2,
+        onion: 4,
+        chicken: 16,
+        beef: 20,
+        fish: 15,
+        prawn: 30,
+        squid: 20,
+        egg: 12
+      }
+
+      function addToCart(itemId) {
+        cartItems[itemId] += 1;
+        updateCart();
+      }
+
+      function removeFromCart(itemId) {
+        if (cartItems[itemId] > 0) {
+          cartItems[itemId] -= 1;
+          updateCart();
+        }
+      }
+
+      function updateCart() {
+        var cartContainer = document.getElementById("cart-container");
+        var totalPrice = 0;
+
+        // Clear previous cart items
+        cartContainer.innerHTML = "";
+
+        // Add items to cart and calculate total price
+        for (var item in cartItems) {
+          if (cartItems[item] > 0) {
+            var cartItem = document.createElement("div");
+            cartItem.classList.add("cart-item");
+
+            var itemName = document.createElement("span");
+            itemName.textContent = item;
+            cartItem.appendChild(itemName);
+
+            var itemCount = document.createElement("span");
+            itemCount.textContent = cartItems[item];
+            cartItem.appendChild(itemCount);
+
+            var removeBtn = document.createElement("button");
+            removeBtn.textContent = "-";
+            removeBtn.setAttribute("onclick", "removeFromCart('" + item + "')");
+            cartItem.appendChild(removeBtn);
+
+            cartContainer.appendChild(cartItem);
+
+            totalPrice += cartItems[item] * itemPrices[item];
+          }
+        }
+
+        // Display total price
+        var totalElement = document.createElement("div");
+        totalElement.classList.add("total");
+        totalElement.textContent = "Total: MYR" + totalPrice.toFixed(2);
+        cartContainer.appendChild(totalElement);
+      }
+    </script>
+  </head>
+  <body>
+    <div class="content">
+      <h1>VEGETABLE AND MEAT</h1>
+    <table>
+      <tr>
+        <th><h3>ITEM</h3></th>
+        <th><h3>PRICE</h3></th>
+      </tr>
+      <tr>
+        <td>
+          <img src="carrot.jpg" alt="v&m" class="animated-image">
+          <br>
+          <span>Carrot</span>
+        </td>
+        <td>
+          <span>Price: MYR 3/kg</span>
+          <br><br>
+          <button onclick="addToCart('carrot')">+</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="broccoli.jpeg" alt="v&m" class="animated-image">
+          <br>
+          <span>Broccoli</span>
+        </td>
+        <td>
+          <span>Price: MYR 4/kg</span>
+          <br><br>
+          <button onclick="addToCart('broccoli')">+</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="corn.jpg" alt="v&m" class="animated-image">
+          <br>
+          <span>Corn</span>
+        </td>
+        <td><span>Price: MYR 3/kg</span>
+          <br><br>
+          <button onclick="addToCart('corn')">+</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="eggplant.jpg" alt="v&m" class="animated-image">
+          <br>
+          <span>Eggplant</span>
+        </td>
+        <td>
+          <span>Price: MYR 4/kg</span>
+          <br><br>
+          <button onclick="addToCart('eggplant')">+</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="cucumber.webp" alt="v&m" class="animated-image">
+          <br>
+          <span>Cucumber</span>
+        </td>
+        <td>
+          <span>Price: MYR 3/kg</span>
+          <br><br>
+          <button onclick="addToCart('cucumber')">+</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="garlic.jpg" alt="v&m" class="animated-image">
+          <br>
+          <span>Garlic</span>
+        </td>
+        <td>
+          <span>Price: MYR 2/kg</span>
+          <br><br>
+          <button onclick="addToCart('garlic')">+</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="onion.jpg" alt="v&m" class="animated-image">
+          <br>
+          <span>Onion</span>
+        </td>
+        <td>
+          <span>Price: MYR 4/kg</span>
+          <br><br>
+          <button onclick="addToCart('onion')">+</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="chicken.png" alt="v&m" class="animated-image">
+          <br>
+          <span>Chicken</span>
+        </td>
+        <td>
+          <span>Price: MYR 16/kg</span>
+          <br><br>
+          <button onclick="addToCart('chicken')">+</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="beef.jpg" alt="v&m" class="animated-image">
+          <br>
+          <span>Beef</span>
+        </td>
+        <td>
+          <span>Price: MYR 20/kg</span>
+          <br><br>
+          <button onclick="addToCart('beef')">+</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="fish.jpg" alt="v&m" class="animated-image">
+          <br>
+          <span>Mackerel Fish</span>
+        </td>
+        <td>
+          <span>Price: MYR 15/kg</span>
+          <br><br>
+          <button onclick="addToCart('fish')">+</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="prawn.webp" alt="v&m" class="animated-image">
+          <br>
+          <span>Prawn</span>
+        </td>
+        <td>
+          <span>Price: MYR 30/kg</span>
+          <br><br>
+          <button onclick="addToCart('prawn')">+</button>
+        </td>
+      </tr><tr>
+        <td>
+          <img src="squid.webp" alt="v&m" class="animated-image">
+          <br>
+          <span>Squid</span>
+        </td>
+        <td>
+          <span>Price: MYR 20/kg</span>
+          <br><br>
+          <button onclick="addToCart('squid')">+</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="egg.webp" alt="v&m" class="animated-image">
+          <br>
+          <span>Egg</span>
+        </td>
+        <td>
+          <span>Price: MYR 12/kg</span>
+          <br><br>
+          <button onclick="addToCart('egg')">+</button>
+        </td>
+      </tr>
+    </table>
+    </div>
+
+    <aside>
+      <h3>CART</h3>
+      <div id="cart-container"></div>
+      <br><br>
+      <button class="proceed-btn" onclick="makePayment()">
+        <a href="~formuser.html" class="btn-link">Proceed to Payment</a>
+      </button>
+    </aside>
+  </body>
+</html>

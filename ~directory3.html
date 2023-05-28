@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+  <link rel="stylesheet" href="`designd3.css">
+  <head>
+    <title>Other...</title>
+    <style>
+      /* Hide counter elements initially */
+      #counterrice,
+      #counteroil,
+      #countersoy,
+      #countertomato,
+      #counterflour,
+      #countersugar,
+      #countersalt{
+        display: none;
+      }
+      table, td, th {
+        border: 1px solid black;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th {
+        height: 70px;
+      }
+
+      /* Styling for the stationary items */
+      .stationary-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        border: 1px solid black;
+        padding: 10px;
+      }
+
+      .stationary-item span {
+        margin: 0 10px;
+      }
+
+      /* Styling for the links in the aside */
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Styling for the item images */
+      img {
+        width: 200px;
+        height: auto;
+        margin-right: 100px;
+      }
+
+      /* Styling for the cart container */
+      #cart-container {
+        margin-top: 20px;
+        border: 1px solid black;
+        padding: 10px;
+      }
+
+      #cart-container .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+      }
+
+      #cart-container .cart-item span {
+        margin-right: 10px;
+      }
+
+      #cart-container .total {
+        font-weight: bold;
+      }
+
+      /* Flexbox setup for the main content and aside */
+      body {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .content {
+        flex: 1;
+      }
+
+      aside {
+        flex: 0 0 450px; /* Set the width of the aside element */
+        margin-top: 80px;
+        border: 1px solid black;
+        padding: 5px;
+        position: sticky;
+        top: 0;
+        height: calc(100vh - 20px); /* Subtract the margin-top of cart-container */
+        overflow-y: auto;
+      }
+
+      button{
+      background-color:salmon;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      }
+      .proceed-btn {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      }
+
+      .btn-link {
+      color: white;
+      text-decoration: none;
+      }
+
+      .proceed-btn:hover {
+      background-color: #45a049;
+      }
+    </style>
+    <script>
+      var cartItems = {
+        rice: 0,
+        oil: 0,
+        soy: 0,
+        tomato: 0,
+        flour: 0,
+        sugar: 0,
+        salt: 0
+      };
+
+      var itemPrices = {
+        rice: 28,
+        oil: 5,
+        soy: 3,
+        tomato: 3,
+        flour: 4,
+        sugar: 3,
+        salt: 3
+      }
+
+      function addToCart(itemId) {
+        cartItems[itemId] += 1;
+        updateCart();
+      }
+
+      function removeFromCart(itemId) {
+        if (cartItems[itemId] > 0) {
+          cartItems[itemId] -= 1;
+          updateCart();
+        }
+      }
+
+      function updateCart() {
+        var cartContainer = document.getElementById("cart-container");
+        var totalPrice = 0;
+
+        // Clear previous cart items
+        cartContainer.innerHTML = "";
+
+        // Add items to cart and calculate total price
+        for (var item in cartItems) {
+          if (cartItems[item] > 0) {
+            var cartItem = document.createElement("div");
+            cartItem.classList.add("cart-item");
+
+            var itemName = document.createElement("span");
+            itemName.textContent = item;
+            cartItem.appendChild(itemName);
+
+            var itemCount = document.createElement("span");
+            itemCount.textContent = cartItems[item];
+            cartItem.appendChild(itemCount);
+
+            var removeBtn = document.createElement("button");
+            removeBtn.textContent = "-";
+            removeBtn.setAttribute("onclick", "removeFromCart('" + item + "')");
+            cartItem.appendChild(removeBtn);
+
+            cartContainer.appendChild(cartItem);
+
+            totalPrice += cartItems[item] * itemPrices[item];
+          }
+        }
+
+        // Display total price
+        var totalElement = document.createElement("div");
+        totalElement.classList.add("total");
+        totalElement.textContent = "Total: MYR" + totalPrice.toFixed(2);
+        cartContainer.appendChild(totalElement);
+      }
+    </script>
+  </head>
+  <body>
+    <div class="content">
+      <h1>OTHER</h1>
+    <table>
+      <tr>
+        <th><h3>ITEM</h3></th>
+        <th><h3>PRICE</h3></th>
+      </tr>
+      <tr>
+        <td>
+          <img src="rice.avif" alt="other" class="animated-image">
+          <br>
+          <span>Rice</span>
+        </td>
+        <td>
+          <span>Price: MYR 28/pack</span>
+          <br><br>
+          <button onclick="addToCart('rice')">+</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="oil.jpg" alt="other" class="animated-image">
+          <br>
+          <span>Oil</span>
+        </td>
+        <td>
+          <span>Price: MYR 5/pack</span>
+          <br><br>
+          <button onclick="addToCart('oil')">+</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="soy.jpeg" alt="other" class="animated-image">
+          <br>
+          <span>Soy sauce</span>
+        </td>
+        <td><span>Price: MYR 3/pack</span>
+          <br><br>
+          <button onclick="addToCart('soy')">+</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="chili.jpg" alt="other" class="animated-image">
+          <br>
+          <span>Tomato ketchup</span>
+        </td>
+        <td>
+          <span>Price: MYR 3/pack</span>
+          <br><br>
+          <button onclick="addToCart('chili')">+</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="flour.jpeg" alt="other" class="animated-image">
+          <br>
+          <span>Flour</span>
+        </td>
+        <td>
+          <span>Price: MYR 4/pack</span>
+          <br><br>
+          <button onclick="addToCart('flour')">+</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="sugar.jpg" alt="other" class="animated-image">
+          <br>
+          <span>Sugar</span>
+        </td>
+        <td>
+          <span>Price: MYR 3/pack</span>
+          <br><br>
+          <button onclick="addToCart('sugar')">+</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="salt.jpeg" alt="other" class="animated-image">
+          <br>
+          <span>Salt</span>
+        </td>
+        <td>
+          <span>Price: MYR 3/pack</span>
+          <br><br>
+          <button onclick="addToCart('salt')">+</button>
+        </td>
+      </tr>
+    </table>
+    </div>
+
+    <aside>
+      <h3>CART</h3>
+      <div id="cart-container"></div>
+      <br><br>
+      <button class="proceed-btn" onclick="makePayment()">
+        <a href="~formuser.html" class="btn-link">Proceed to Payment</a>
+      </button>
+    </aside>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+table, td, th {
+    border: 1px solid black;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    background-image: url("TableBG.jpg");
+    background-repeat: no-repeat;
+    background-size: 100vw 350vh;
+  }
+  th {
+    height: 70px;
+  }
+  body{
+    background-image: url("VegeBG.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: 100vw 360vh;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  h1{
+    background-color:lightgreen;
+  }
+  aside{
+    background-image: url("wood.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: 60vw 100vh;
+  }
+  
