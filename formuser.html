@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="`formuser.css">
+<head>
+  <title>Purchase</title>
+  <style>
+    h1 {
+      font-size: 40px;
+      text-align: center;
+      -webkit-text-fill-color: aliceblue;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      background-color:coral;
+    }
+
+    h2 {
+      -webkit-text-fill-color: black;
+    }
+
+    h4 {
+      text-align: center;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        background-image: url(FormBG.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-size: 100vw 170vh;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    p {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    form {
+      max-width: 500px;
+      margin: auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 100px rgba(196, 123, 15, 0.849);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+
+    button[type="submit"] {
+      background-color:salmon;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button[type="submit"]:hover {
+      background-color:darksalmon;
+    }
+  </style>
+</head>
+<body>
+  <h1>Purchase</h1>
+
+  <form id="purchaseForm">
+    <h2>Customer Information</h2>
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+
+    <h2>Shipping Details</h2>
+    <label for="ItemPrice">Item Price:</label>
+    <input type="text" id="ItemPrice" required>
+
+    <label for="address">Address:</label>
+    <input type="text" id="address" required>
+
+    <label for="city">City:</label>
+    <input type="text" id="city" required>
+
+    <label for="zip">Zip Code:</label>
+    <input type="text" id="zip" required>
+
+    <h2>Payment Information</h2>
+    <h3>Credit/Debit Card</h3>
+    <label for="cardNumber">Card Number:</label>
+    <input type="text" id="cardNumber" required>
+
+    <label for="expiry">Expiry Date:</label>
+    <input type="text" id="expiry" required>
+
+    <label for="cvv">CVV:</label>
+    <input type="text" id="cvv" required>
+
+    <input type="hidden" id="totalPrice" name="totalPrice" value="">
+
+    <button type="submit">Submit Purchase</button>
+  </form>
+
+  <script>
+    document.getElementById('purchaseForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      var totalPrice = document.getElementById('ItemPrice').value;
+      document.getElementById('totalPrice').value = totalPrice;
+
+      alert("Thank you for your purchase! We will process your order.");
+
+      document.getElementById('purchaseForm').reset();
+    });
+  </script>
+</body>
+</html>
